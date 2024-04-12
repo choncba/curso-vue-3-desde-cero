@@ -40,26 +40,22 @@
                 <input type="submit" class="search__submit" value="Search">
             </form>
 
-            <!-- Result - Widget para mostrar el resultado de la búsqueda -->
+            <!-- Componente Result - Widget para mostrar el resultado de la búsqueda -->
             <transition>
-                <div class="result" v-if="result">
-                    <h2 class="result__name">{{ result.name }}</h2>
-                    <!-- <a v-if="favorites.has(result.id)" href="#" class="result__toggle-favorite" @click="removeFavorite">Remove Favorite ⭐️</a>
-                    <a v-else href="#" class="result__toggle-favorite" @click="addFavorite">Add Favorite ⭐️</a> -->
-                    <a v-if="isFavorite" href="#" class="result__toggle-favorite" @click="removeFavorite">Remove Favorite ⭐️</a>
-                    <a v-else href="#" class="result__toggle-favorite" @click="addFavorite">Add Favorite ⭐️</a>
-                    <img v-bind:src="result.avatar_url" :alt="result.name" class="result__avatar">
-                    <p class="result__bio"> {{result.bio}}
-                        <br>
-                        <a v-bind:href="result.blog" target="_blank" class="result__blog">{{result.blog}}</a>
-                    </p>
-                </div>
+                <app-profile
+                    v-if="result"
+                    :result="result"
+                    :is-favorite="isFavorite"
+                    @add-favorite="addFavorite"
+                    @remove-favorite="removeFavorite"
+                />
             </transition>
             <!-- Error -->
             <div class="result__error" v-if="error">{{error}}</div>
         </article>
     </div>
     <script src="js/main.js"></script>
+    <script src="js/components/AppProfile.js"></script>
     <script>
         const mountedApp = app.mount("#app");
     </script>
